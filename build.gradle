@@ -1,0 +1,74 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.sample'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+ext {
+	JJWT_VERSION = "0.12.6"
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
+	implementation 'org.springframework.boot:spring-boot-starter:3.3.4'
+	implementation 'org.springframework.boot:spring-boot-starter-web:3.3.4'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.session:spring-session-core'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'com.mysql:mysql-connector-j:9.0.0'
+	runtimeOnly 'com.h2database:h2'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// spring security 적용
+	implementation 'org.springframework.boot:spring-boot-starter-security:3.3.4'
+	testImplementation("org.springframework.security:spring-security-test")
+
+	/// JWT 적용
+	implementation "io.jsonwebtoken:jjwt-api:${JJWT_VERSION}"
+	implementation "io.jsonwebtoken:jjwt-jackson:${JJWT_VERSION}"
+	implementation "io.jsonwebtoken:jjwt-impl:${JJWT_VERSION}"
+
+	// https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	/// Redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	/// Kafka & Email
+	implementation 'org.springframework.kafka:spring-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+	/// Swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+}
+
+test {
+	useJUnitPlatform()
+}

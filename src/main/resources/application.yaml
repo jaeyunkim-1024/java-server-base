@@ -1,0 +1,61 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: base
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ab180
+    username: test
+    password: qwer135!@
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true # sql ? ?? jpql ??????  ???? ??
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+#        dialect: org.hibernate.dialect.MySQLDialect
+#      sql:
+#        init:
+#          schema-locations: classpath:db/schema.sql
+#          data-locations: classpath:db/data.sql
+
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+
+jwt:
+  secretKey: VGhpc2lzTXlTcHJpbmdCb290UHJvZWpjdEFuZE15cG9ydGZvbGlv  # JWT를 서명할 때 사용할 비밀 키
+  expirationTime: 3600  # 토큰의 만료 시간 (초 단위), 예: 1시간 (3600초)
+  salt:
+    value: a2p5MTAyNA
+    num: 3
+
+
+smtp:
+  host: smtp.gmail.com
+  username: rlawodbs1024@gmail.com
+  password: gzmhjxrqzluslynf
+  port: 465
+  socketFactory-class: javax.net.ssl.SSLSocketFactory
+  supplier: gmail.com
+  from-mail: rlawodbs1024@gmail.com
+
+kafka:
+  bootstrap: localhost:9092
+#  bootstrap: 0.tcp.jp.ngrok.io:16295
+  topic:
+      email:
+        name: email-topic
+        group-id: email-group
