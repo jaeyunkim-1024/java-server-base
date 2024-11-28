@@ -6,11 +6,19 @@
 - Redis : 7.2.6 ( 비밀번호 설정 X )
 - Kafka : 3.9.0
 ```
+
 ---
 
-## Swagger
+# Func
+<ul>
+    <li>Security + JWT 이용 로그인 + 이력 조회</li>
+    <li>Kafka + Redis 이용한 이메일 인증</li>
+    <li>Kafka 이용한 주문 내 여러 API 호출 처리 및 롤백 처리(개발 예정)</li>
+    <li>STOMP 이용한 브로드 캐스트 채팅 구현(개발 예정)</li>
+    <li>대용량 엑셀 다운로드 처리(개발 예정)</li>
+</ul>
 
-
+---
 
 ## System Design
 ### Preview
