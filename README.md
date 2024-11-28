@@ -14,10 +14,11 @@
 
 ## System Design
 ### Preview
-![내 Git 시스템 디자인](https://github.com/user-attachments/assets/f19233f7-8838-46bd-b04e-8ddf5635864a)
+![내 Git 시스템 디자인](https://github.com/user-attachments/assets/1a206182-a6c4-442d-838b-3c8a3bd5e824)
+
 
 ### 원본 링크 
-![내 Git 시스템 디자인](https://github.com/user-attachments/assets/f19233f7-8838-46bd-b04e-8ddf5635864a)
+https://drive.google.com/file/d/1BFRX9Z4EyPh6cQ5ERUFoMw18vIENoC4Q/view?usp=share_link
 
 
 
