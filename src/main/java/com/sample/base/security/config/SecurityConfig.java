@@ -43,10 +43,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((req) ->
                         req
+                                .requestMatchers("swagger-ui/index.html").permitAll()
                                 .requestMatchers("/users/update/**").hasAnyRole(UserRoles.ADMIN.getType(), UserRoles.USER.getType())
                                 .requestMatchers("/admin/users/**").hasRole(UserRoles.ADMIN.getType())
                                 .requestMatchers( "/users/**","/error").permitAll()
-//                                .requestMatchers("/kafka/**").permitAll()
                                 .requestMatchers("/kafka/**").hasAnyRole(UserRoles.NO_CERT.getType(),UserRoles.ADMIN.getType(), UserRoles.USER.getType())
                                 .anyRequest().hasAnyRole(UserRoles.ADMIN.getType(), UserRoles.USER.getType())
                 )

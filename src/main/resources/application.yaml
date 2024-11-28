@@ -59,3 +59,7 @@ kafka:
       email:
         name: email-topic
         group-id: email-group
+
+springdoc:
+  paths-to-match: /api/**
+
