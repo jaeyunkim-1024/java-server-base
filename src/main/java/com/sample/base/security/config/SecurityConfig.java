@@ -48,7 +48,7 @@ public class SecurityConfig {
                                         .requestMatchers("/api/users/signin").permitAll()
                                         .requestMatchers( "/error").permitAll()
                                         .requestMatchers("/anonymous/health-check").permitAll()
-                                        .requestMatchers("/api/admin/users/**").hasRole(UserRoles.ADMIN.getType())
+                                        .requestMatchers("/api/admin/**").hasRole(UserRoles.ADMIN.getType())
                                         .anyRequest().hasAnyRole(UserRoles.ADMIN.getType(), UserRoles.USER.getType())
                 )
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)

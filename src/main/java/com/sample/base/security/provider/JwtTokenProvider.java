@@ -66,7 +66,7 @@ public class JwtTokenProvider {
                 .claim("authorities",authorities)
                 .claim("principal", principal.getUsername())
                 .claim("isEmailCert",principal.isEmailCert() ? "Y" : "N")
-                .claim("isLock",principal.isLocked())
+                .claim("isLock",principal.isAccountLocked() ? "Y" : "N")
                 .issuedAt(issuedAt)
                 .expiration(expiration)
                 .signWith(getKey(), Jwts.SIG.HS256)

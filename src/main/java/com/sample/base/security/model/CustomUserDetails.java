@@ -51,14 +51,14 @@ public class CustomUserDetails implements UserDetails {
         return !role.equals(UserRoles.NO_CERT.getType());
     }
 
+    public boolean isAccountLocked(){
+        return isLock;
+    }
+
     /// 계정 잠금, IS_LOCKED 로 확인, 보통 비밀번호 연속 틀리면 적용하니
     @Override
     public boolean isAccountNonLocked(){
-        return !isLock;
-    }
-
-    public boolean isLocked(){
-        return isLock;
+        return true;
     }
 
     /// 비밀번호 만료 여부

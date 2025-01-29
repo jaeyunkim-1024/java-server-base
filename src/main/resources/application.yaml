@@ -1,8 +1,8 @@
 spring:
   application:
     name: base
-#springdoc:
-#  paths-to-match: /api/**
+springdoc:
+  paths-to-match: /api/**
 
 kafka:
   topic:
