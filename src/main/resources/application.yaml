@@ -1,12 +1,12 @@
 server:
-  port: 9090
+  port: 8080
 spring:
   application:
     name: base
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ab180
-    username: test
+    url: jdbc:mysql://localhost:3306/test
+    username: localserver
     password: qwer135!@
   jpa:
     hibernate:
@@ -24,24 +24,21 @@ spring:
       host: localhost
       port: 6379
 
-#        dialect: org.hibernate.dialect.MySQLDialect
-#      sql:
-#        init:
-#          schema-locations: classpath:db/schema.sql
-#          data-locations: classpath:db/data.sql
-
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2-console
-
 jwt:
   secretKey: VGhpc2lzTXlTcHJpbmdCb290UHJvZWpjdEFuZE15cG9ydGZvbGlv  # JWT를 서명할 때 사용할 비밀 키
   expirationTime: 3600  # 토큰의 만료 시간 (초 단위), 예: 1시간 (3600초)
   salt:
     value: a2p5MTAyNA
     num: 3
+springdoc:
+  paths-to-match: /api/**
 
+kafka:
+  bootstrap: localhost:9092
+  topic:
+    email:
+      name: email-topic
+      group-id: email-group
 
 smtp:
   host: smtp.gmail.com
@@ -51,15 +48,4 @@ smtp:
   socketFactory-class: javax.net.ssl.SSLSocketFactory
   supplier: gmail.com
   from-mail: rlawodbs1024@gmail.com
-
-kafka:
-  bootstrap: localhost:9092
-#  bootstrap: 0.tcp.jp.ngrok.io:16295
-  topic:
-      email:
-        name: email-topic
-        group-id: email-group
-
-springdoc:
-  paths-to-match: /api/**
 
