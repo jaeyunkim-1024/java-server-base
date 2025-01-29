@@ -1,6 +1,5 @@
 package com.sample.base.user.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sample.base.common.model.CustomResponseEntity;
 import com.sample.base.common.model.JwtTokenModel;
 import com.sample.base.security.model.CustomUserDetails;
@@ -12,6 +11,7 @@ import com.sample.base.user.dto.UserInfoUpdateRequestDto;
 import com.sample.base.user.enums.UserRoles;
 import com.sample.base.user.service.CustomUserDetailService;
 import com.sample.base.user.service.UserInfoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

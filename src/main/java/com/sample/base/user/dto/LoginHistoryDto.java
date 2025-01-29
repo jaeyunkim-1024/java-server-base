@@ -18,7 +18,7 @@ public class LoginHistoryDto {
         return LoginHistoryDto
                 .builder()
                 .loginHistorySeq(loginHistory.getLoginHistorySeq())
-                .email(loginHistory.getEmail())
+//                .email(loginHistory.getEmail())
                 .desc(map.get(loginHistory.getAccessCd()).getDesc())
                 .build();
     }

@@ -5,8 +5,10 @@ import com.sample.base.common.model.JwtTokenModel;
 import com.sample.base.security.model.CustomUserDetails;
 import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.entity.LoginHistory;
+import com.sample.base.user.entity.UserInfo;
 import com.sample.base.user.enums.AccessCode;
 import com.sample.base.user.repository.LoginHistoryRepository;
+import com.sample.base.user.repository.UserInfoRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +27,7 @@ import java.io.IOException;
 @Slf4j
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final LoginHistoryRepository loginHistoryRepository;
+    private final UserInfoRepository userInfoRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
@@ -42,10 +45,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private void insertHistory(Authentication authentication) {
         CustomUserDetails d = (CustomUserDetails) authentication.getPrincipal();
-
+        UserInfo userInfo = userInfoRepository.findUserInfoByEmail(d.getUsername());
         LoginHistory loginHistory = LoginHistory.builder()
                 .accessCd(AccessCode.LOGIN_SUCCESS.getCode())
-                .email(d.getUsername())
+                .userSeq(userInfo.getUserSeq())
+//                .email(d.getUsername())
                 .build();
         loginHistoryRepository.save(loginHistory);
     }

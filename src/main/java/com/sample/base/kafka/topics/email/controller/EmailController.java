@@ -1,6 +1,5 @@
 package com.sample.base.kafka.topics.email.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sample.base.common.model.CustomResponseEntity;
 import com.sample.base.common.util.VerifyCodeUtil;
 import com.sample.base.kafka.topics.email.model.EmailDto;
@@ -10,6 +9,7 @@ import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.enums.UserRoles;
 import com.sample.base.user.service.CustomUserDetailService;
 import com.sample.base.user.service.UserInfoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

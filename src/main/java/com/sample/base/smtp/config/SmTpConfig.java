@@ -1,34 +1,38 @@
 package com.sample.base.smtp.config;
 
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import com.sample.base.common.config.DotEnvScheme;
+import io.github.cdimascio.dotenv.Dotenv;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
-@Data
+
 @Configuration
-@EnableConfigurationProperties
-@ConfigurationProperties("smtp")
+@RequiredArgsConstructor
 public class SmTpConfig {
-    // SMTP 서버
-    private String host;
+    private final Dotenv dotenv;
 
-    // 계정
-    private String username;
+    public String getHost(){
+        return dotenv.get(DotEnvScheme.SMTP_HOST.name());
+    }
 
-    // 비밀번호
-    private String password;
+    public int getPort(){
+        return Integer.parseInt(dotenv.get(DotEnvScheme.SMTP_PORT.name()));
+    }
 
-    // 포트번호
-    private int port;
+    public String getUsername(){
+        return dotenv.get(DotEnvScheme.SMTP_USERNAME.name());
+    }
 
-    // 메일연결자
-    private String supplier;
+    public String getPassword(){
+        return dotenv.get(DotEnvScheme.SMTP_PASSWORD.name());
+    }
 
-    // 발신자 메일
-    private String fromMail;
+    public String getSocketFactoryClass(){
+        return dotenv.get(DotEnvScheme.SMTP_SOCKET_FACTORY_CLASS.name());
+    }
 
-    // tls 설정
-    private String socketFactoryClass;
+    public String getFromMail(){
+        return dotenv.get(DotEnvScheme.SMTP_FROM_MAIL.name());
+    }
 }

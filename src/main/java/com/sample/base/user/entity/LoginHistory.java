@@ -22,13 +22,13 @@ public class LoginHistory {
     @Column(name = "LOGIN_HISTORY_SEQ")
     private Long loginHistorySeq;
 
+    @Column(name = "USER_SEQ")
+    private Long userSeq;
+
     @UpdateTimestamp
     @Column(name = "LOGIN_ACCESS_TIME")
     private Timestamp loginAccessTime;
 
     @Column(name = "ACCESS_CD")
     private String accessCd;
-
-    @Column(name = "EMAIL")
-    private String email;
 }

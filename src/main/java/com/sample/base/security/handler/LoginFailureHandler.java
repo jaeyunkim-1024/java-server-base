@@ -27,7 +27,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
         if(exception instanceof AuthenticationServiceException){
             if(!exception.getMessage().isEmpty()){
                 LoginHistory loginHistory = LoginHistory.builder()
-                        .email(exception.getMessage())
+//                        .email(exception.getMessage())
                         .accessCd(AccessCode.LOGIN_FAILED_INVALID_PASSWORD.getCode())
                         .build();
                 loginHistoryRepository.save(loginHistory);
@@ -35,7 +35,7 @@ public class LoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
         }else{
             if(exception instanceof BadCredentialsException){
                 LoginHistory loginHistory = LoginHistory.builder()
-                        .email(exception.getMessage())
+//                        .email(exception.getMessage())
                         .accessCd(AccessCode.LOGIN_FAILED_NOT_CORRECT_EMAIL_PWD.getCode())
                         .build();
                 loginHistoryRepository.save(loginHistory);

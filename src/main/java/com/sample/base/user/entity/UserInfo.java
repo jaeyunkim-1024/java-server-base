@@ -23,10 +23,10 @@ public class UserInfo {
     @Column(name = "USER_SEQ")
     private Long userSeq;
 
-    @Column(name = "email")
+    @Column(name = "USER_EMAIL")
     private String email;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "USER_PASSWORD")
     private String password;
 
     @Column(name = "USER_NAME")
@@ -43,7 +43,7 @@ public class UserInfo {
 
     @Builder.Default
     @Column(name = "IS_LOCK")
-    private String isLock = "N";
+    private Boolean isLock = false;
 
     @Builder.Default
     @Column(name = "USER_ROLE")

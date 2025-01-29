@@ -1,18 +1,19 @@
 package com.sample.base.security.provider;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sample.base.common.config.DotEnvScheme;
 import com.sample.base.common.model.JwtTokenModel;
 import com.sample.base.common.util.CustomTimeUtil;
 import com.sample.base.redis.service.RedisService;
 import com.sample.base.security.model.CustomUserDetails;
 import com.sample.base.user.enums.UserRoles;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,17 +32,18 @@ import java.util.stream.Collectors;
 @Slf4j
 public class JwtTokenProvider {
     private final RedisService redisService;
-    @Value("${jwt.secretKey}")
-    private String secretKey;
-
-    @Value("${jwt.expirationTime}")
-    private Long expirationTime;
-
-    @Value("${jwt.salt.value}")
-    private String salt;
-
-    @Value("${jwt.salt.num}")
-    private int num;
+    private final Dotenv dotenv;
+//    @Value("${jwt.secretKey}")
+//    private String secretKey;
+//
+//    @Value("${jwt.expirationTime}")
+//    private Long expirationTime;
+//
+//    @Value("${jwt.salt.value}")
+//    private String salt;
+//
+//    @Value("${jwt.salt.num}")
+//    private int num;
 
     /// 토큰 생성
     public JwtTokenModel issuedToken(Authentication authentication) throws JsonProcessingException {
@@ -55,21 +57,23 @@ public class JwtTokenProvider {
     }
     private JwtTokenModel tokenBuilder(String subject, CustomUserDetails principal, String authorities) {
         Timestamp issuedAt = CustomTimeUtil.getCurrentTime();
-        Timestamp expiration = CustomTimeUtil.getExpireTimeByTime(expirationTime);
+        String envJwtExpiration = dotenv.get(DotEnvScheme.JWT_EXPIRATION.name());
+        int expirationInt = Integer.parseInt(envJwtExpiration);
+        Timestamp expiration = CustomTimeUtil.getExpireTimeByTime(expirationInt);
 
         String jwt = Jwts.builder()
                 .subject(subject)
                 .claim("authorities",authorities)
                 .claim("principal", principal.getUsername())
                 .claim("isEmailCert",principal.isEmailCert() ? "Y" : "N")
-                .claim("isLock",principal.isAccountLocked() ? "Y" : "N")
+                .claim("isLock",principal.isLocked())
                 .issuedAt(issuedAt)
                 .expiration(expiration)
                 .signWith(getKey(), Jwts.SIG.HS256)
                 .compact();
         String saltingToken = salting(jwt);
 
-        redisService.setEnableToken(saltingToken, principal.getUsername(), expirationTime);
+        redisService.setEnableToken(saltingToken, principal.getUsername(), expirationInt);
 
         return JwtTokenModel.builder()
                 .token(saltingToken)
@@ -147,6 +151,7 @@ public class JwtTokenProvider {
     }
 
     private SecretKey getKey() {
+        String secretKey = dotenv.get(DotEnvScheme.JWT_SECRETKEY.name());
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
     }
 
@@ -159,6 +164,9 @@ public class JwtTokenProvider {
     }
 
     private String salting(String jwt){
+        int num = Integer.parseInt(dotenv.get(DotEnvScheme.JWT_NUM.name()));
+        String salt = dotenv.get(DotEnvScheme.JWT_SALT.name());
+
         String[] arr = jwt.split("\\.");
         StringBuilder stringBuilder = new StringBuilder();
         String header = arr[0];
@@ -174,6 +182,9 @@ public class JwtTokenProvider {
     }
 
     private String desalting(String token){
+        int num = Integer.parseInt(dotenv.get(DotEnvScheme.JWT_NUM.name()));
+        String salt = dotenv.get(DotEnvScheme.JWT_SALT.name());
+
         String[] arr = token.split("\\.");
         StringBuilder stringBuilder = new StringBuilder();
         String header = arr[0];

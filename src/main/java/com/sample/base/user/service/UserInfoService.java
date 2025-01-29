@@ -105,7 +105,7 @@ public class UserInfoService {
         if(entity != null){
             LoginHistory loginHistory = LoginHistory
                     .builder()
-                    .email(entity.getEmail())
+//                    .email(entity.getEmail())
                     .accessCd(AccessCode.LOGOUT.getCode())
                     .build();
             loginHistoryRepository.save(loginHistory);

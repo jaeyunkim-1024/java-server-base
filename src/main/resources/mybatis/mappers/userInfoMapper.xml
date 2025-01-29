@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.base.mybatis.mappers.UserInfoMapper">
+
+    <!-- 전체 조회 -->
+    <select id="selectUserInfo" resultType="UserInfo">
+        SELECT *
+        FROM USER_INFO
+    </select>
+
+<!--    <select id="selectLoginHistory" resultType="LoginHistory">-->
+<!--        SELECT *-->
+<!--        FROM LOGIN_HISTORY-->
+<!--    </select>-->
+</mapper>
