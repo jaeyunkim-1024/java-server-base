@@ -43,12 +43,15 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((req) ->
                                 req
-                                        .requestMatchers("swagger-ui/index.html").permitAll()
-                                        .requestMatchers("/api/users/signup").permitAll()
-                                        .requestMatchers("/api/users/signin").permitAll()
-                                        .requestMatchers( "/error").permitAll()
-                                        .requestMatchers("/anonymous/health-check").permitAll()
+                                        .requestMatchers(
+                                                "swagger-ui/index.html"
+                                                ,"/error"
+                                                ,"/anonymous/health-check"
+                                                ,"/api/auth/sign-up"
+                                                ,"/api/auth/sign-in"
+                                        ).permitAll()
                                         .requestMatchers("/api/admin/**").hasRole(UserRoles.ADMIN.getType())
+                                        .requestMatchers("/api/auth/sign-out").hasAnyRole(UserRoles.ADMIN.getType(),UserRoles.USER.getType(),UserRoles.NO_CERT.getType())
                                         .anyRequest().hasAnyRole(UserRoles.ADMIN.getType(), UserRoles.USER.getType())
                 )
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
@@ -74,7 +77,7 @@ public class SecurityConfig {
 
     @Bean
     public LoginFilter loginFilter() throws Exception {
-        LoginFilter loginFilter = new LoginFilter("/api/users/signin");
+        LoginFilter loginFilter = new LoginFilter("/api/auth/sign-in");
         loginFilter.setAuthenticationManager(authenticationManager());
         loginFilter.setAuthenticationSuccessHandler(loginSuccessHandler);
         loginFilter.setAuthenticationFailureHandler(loginFailureHandler);

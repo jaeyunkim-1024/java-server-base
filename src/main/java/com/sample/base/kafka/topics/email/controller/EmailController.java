@@ -7,6 +7,7 @@ import com.sample.base.kafka.topics.email.service.EmailProducer;
 import com.sample.base.security.model.CustomUserDetails;
 import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.enums.UserRoles;
+import com.sample.base.user.service.AuthService;
 import com.sample.base.user.service.CustomUserDetailService;
 import com.sample.base.user.service.UserInfoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class EmailController {
     private final EmailProducer producer;
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserInfoService userInfoService;
+    private final AuthService authService;
     private final CustomUserDetailService customUserDetailService;
 
     @PostMapping(value = "/send")
@@ -64,7 +65,7 @@ public class EmailController {
                 .verifyCode(verifyCode)
                 .build();
         Object token = "인증코드를 확인해주세요.";
-        if(userInfoService.verifyCode(dto) != -1){
+        if(authService.verifyCode(dto) != -1){
             /// 토큰 재발급
             try{
                 /// 기존 토큰 만료

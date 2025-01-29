@@ -17,7 +17,7 @@ class UserInfoServiceTest {
     static String email = "rlawodbs1024@gmail.com";
     static String username = "김재윤";
     @Autowired
-    private UserInfoService userInfoService;
+    private AuthService authService;
 
     @BeforeAll
     static void setUp(){
@@ -34,7 +34,7 @@ class UserInfoServiceTest {
         userInfoJoinRequestDto.setPassword(minPwd);
         UserInfoDto r = null;
         try{
-            r = userInfoService.signUp(userInfoJoinRequestDto);
+            r = authService.signUp(userInfoJoinRequestDto);
         }catch (IllegalArgumentException iae){
             System.out.println(iae.getMessage());
         }
@@ -48,7 +48,7 @@ class UserInfoServiceTest {
         userInfoJoinRequestDto.setPassword(maxPwd);
         UserInfoDto r = null;
         try{
-            r = userInfoService.signUp(userInfoJoinRequestDto);
+            r = authService.signUp(userInfoJoinRequestDto);
         }catch (IllegalArgumentException iae){
             System.out.println(iae.getMessage());
         }
@@ -60,7 +60,7 @@ class UserInfoServiceTest {
     void 회원가입_테스트() {
         String pwd = "fdjsalkfjsda";
         userInfoJoinRequestDto.setPassword(pwd);
-        UserInfoDto r = userInfoService.signUp(userInfoJoinRequestDto);
+        UserInfoDto r = authService.signUp(userInfoJoinRequestDto);
         assertEquals(email,r.getEmail());
     }
 }
