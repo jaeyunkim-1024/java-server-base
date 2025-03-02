@@ -1,7 +1,7 @@
 package com.sample.base.common.security.config;
 
 import com.sample.base.client.user.enums.UserRoles;
-import com.sample.base.client.user.service.CustomUserDetailService;
+import com.sample.base.client.user.service.security.CustomUserDetailService;
 import com.sample.base.common.security.filter.JwtExceptionFilter;
 import com.sample.base.common.security.filter.JwtFilter;
 import com.sample.base.common.security.filter.LoginFilter;
@@ -50,10 +50,12 @@ public class SecurityConfig {
                                                 ,"/api/auth/sign-up"
                                                 ,"/api/auth/sign-in"
                                         ).permitAll()
-                                        .requestMatchers("/api/admin/**").hasRole(UserRoles.ADMIN.getType())
-                                        .requestMatchers("/api/auth/sign-out","/api/auth/email/**")
+                                        .requestMatchers("/api/admin/**")
+                                            .hasRole(UserRoles.ADMIN.getType())
+                                        .requestMatchers("/api/auth/sign-out")
                                             .hasAnyRole(UserRoles.ADMIN.getType(),UserRoles.USER.getType(),UserRoles.NO_CERT.getType())
-                                        .anyRequest().hasAnyRole(UserRoles.USER.getType())
+                                        .anyRequest()
+                                            .hasAnyRole(UserRoles.ADMIN.getType(),UserRoles.USER.getType())
                 )
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionFilter(), JwtFilter.class)

@@ -1,7 +1,8 @@
-package com.sample.base.client.user.kafka.model;
+package com.sample.base.client.user.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sample.base.common.enums.RedisPrefixEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmailDto {
+public class EmailAuthDto {
     private String email;
     private String verifyCode;
 
@@ -26,6 +27,6 @@ public class EmailDto {
     }
 
     public String generateRedisKey() {
-        return email +"_verify";
+        return RedisPrefixEnum.EMAIL_AUTH.prefix + ":" + email;
     }
 }

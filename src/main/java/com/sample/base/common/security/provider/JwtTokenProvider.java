@@ -2,10 +2,10 @@ package com.sample.base.common.security.provider;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sample.base.client.user.enums.UserRoles;
+import com.sample.base.client.user.service.UserTokenService;
 import com.sample.base.common.config.env.DotEnvScheme;
 import com.sample.base.common.dto.JwtTokenModel;
 import com.sample.base.common.security.model.CustomUserDetails;
-import com.sample.base.common.service.RedisService;
 import com.sample.base.common.util.CustomTimeUtil;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.*;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class JwtTokenProvider {
-    private final RedisService redisService;
+    private final UserTokenService userTokenService;
     private final Dotenv dotenv;
 //    @Value("${jwt.secretKey}")
 //    private String secretKey;
@@ -73,7 +73,7 @@ public class JwtTokenProvider {
                 .compact();
         String saltingToken = salting(jwt);
 
-        redisService.setEnableToken(saltingToken, principal.getUsername(), expirationInt);
+        userTokenService.setEnableToken(saltingToken, principal.getUsername(), expirationInt);
 
         return JwtTokenModel.builder()
                 .token(saltingToken)
@@ -85,7 +85,7 @@ public class JwtTokenProvider {
     /// 토큰 만료
     public boolean tokenExpire(String email) {
         try{
-            redisService.setDisableToken(email);
+            userTokenService.setDisableToken(email);
             return true;
         }catch(Exception e){
             return false;
@@ -113,7 +113,7 @@ public class JwtTokenProvider {
     /// 토큰 검증
     public boolean validateToken(String token) {
         String saltingToken = salting(token);
-        boolean isExpireInRedis = redisService.isEnableToken(saltingToken);
+        boolean isExpireInRedis = userTokenService.isEnableToken(saltingToken);
         if(!isExpireInRedis){
             return false;
         }

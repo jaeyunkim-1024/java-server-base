@@ -1,7 +1,7 @@
-package com.sample.base.client.user.controller;
+package com.sample.base.admin.controller;
 
+import com.sample.base.admin.service.AdminUserInfoService;
 import com.sample.base.client.user.dto.LogoutDto;
-import com.sample.base.client.user.service.AdminUserInfoService;
 import com.sample.base.common.dto.CustomResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

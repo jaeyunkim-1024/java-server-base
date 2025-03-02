@@ -1,4 +1,4 @@
-package com.sample.base.client.user.service;
+package com.sample.base.client.user.service.security;
 
 import com.sample.base.client.user.repository.UserInfoRepository;
 import com.sample.base.common.security.model.CustomUserDetails;

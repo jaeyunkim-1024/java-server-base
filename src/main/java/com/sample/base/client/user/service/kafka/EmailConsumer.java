@@ -1,12 +1,11 @@
-package com.sample.base.client.user.kafka.service;
+package com.sample.base.client.user.service.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sample.base.client.user.kafka.model.EmailDto;
+import com.sample.base.client.user.dto.EmailAuthDto;
 import com.sample.base.common.config.smtp.SmTpConfig;
 import com.sample.base.common.service.RedisService;
 import com.sample.base.common.service.SmtpMailService;
-import com.sample.base.common.util.VerifyCodeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -23,10 +22,11 @@ public class EmailConsumer {
 
     @KafkaListener(topics = "${kafka.topic.email.name}", groupId = "${kafka.topic.email.group-id}")
     public void listener(ConsumerRecord<String, String> data) throws JsonProcessingException {
-        EmailDto payload = new ObjectMapper().readValue(data.value(), EmailDto.class);
-        redisService.setValue(payload.generateRedisKey(),payload.getVerifyCode(), VerifyCodeUtil.getVerifyExpire());
+        EmailAuthDto emailAuthDto = new ObjectMapper().readValue(data.value(), EmailAuthDto.class);
+        redisService.setValue(emailAuthDto.generateRedisKey(),emailAuthDto.getVerifyCode(), 5 * 60L);
 
         /// 이메일 전송
-        smtpMailService.sendEmail(config.getFromMail(),"로컬인증이메일", payload.getVerifyCode());
+        String to = config.getFromMail();
+        smtpMailService.sendEmail(to,"이메일 인증 코드", emailAuthDto.getVerifyCode());
     }
 }

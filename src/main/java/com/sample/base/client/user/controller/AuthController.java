@@ -1,18 +1,17 @@
 package com.sample.base.client.user.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sample.base.client.user.dto.EmailAuthDto;
 import com.sample.base.client.user.dto.LogoutDto;
 import com.sample.base.client.user.dto.UserInfoDto;
 import com.sample.base.client.user.dto.UserInfoJoinRequestDto;
 import com.sample.base.client.user.enums.UserRoles;
-import com.sample.base.client.user.kafka.model.EmailDto;
-import com.sample.base.client.user.kafka.service.EmailProducer;
 import com.sample.base.client.user.service.AuthService;
-import com.sample.base.client.user.service.CustomUserDetailService;
+import com.sample.base.client.user.service.kafka.EmailProducer;
+import com.sample.base.client.user.service.security.CustomUserDetailService;
 import com.sample.base.common.dto.CustomResponseDto;
 import com.sample.base.common.security.model.CustomUserDetails;
 import com.sample.base.common.security.provider.JwtTokenProvider;
-import com.sample.base.common.util.VerifyCodeUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -69,12 +68,7 @@ public class AuthController {
         }
 
         String email = jwtTokenProvider.getPrincipal(request);
-        String verifyCode = VerifyCodeUtil.generated();
-        EmailDto emailDto = EmailDto.builder()
-                .email(email)
-                .verifyCode(verifyCode)
-                .build();
-        this.producer.send(emailDto.toString());
+        producer.sendTo(email);
         return CustomResponseDto
                 .builder()
                 .data("이메일이 발송되었습니다.")
@@ -91,7 +85,7 @@ public class AuthController {
                     .build();
         }
         String email = jwtTokenProvider.getPrincipal(request);
-        EmailDto dto = EmailDto.builder()
+        EmailAuthDto dto = EmailAuthDto.builder()
                 .email(email)
                 .verifyCode(verifyCode)
                 .build();

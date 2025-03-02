@@ -1,5 +1,6 @@
 package com.sample.base.client.user.service;
 
+import com.sample.base.client.user.dto.EmailAuthDto;
 import com.sample.base.client.user.dto.UserInfoDto;
 import com.sample.base.client.user.dto.UserInfoJoinRequestDto;
 import com.sample.base.client.user.dto.UserInfoUpdateRequestDto;
@@ -7,7 +8,6 @@ import com.sample.base.client.user.entity.LoginHistory;
 import com.sample.base.client.user.entity.UserInfo;
 import com.sample.base.client.user.enums.AccessCode;
 import com.sample.base.client.user.enums.UserRoles;
-import com.sample.base.client.user.kafka.model.EmailDto;
 import com.sample.base.client.user.repository.LoginHistoryRepository;
 import com.sample.base.client.user.repository.UserInfoRepository;
 import com.sample.base.common.service.RedisService;
@@ -75,7 +75,7 @@ public class AuthService {
         }
     }
 
-    public int verifyCode(EmailDto dto){
+    public int verifyCode(EmailAuthDto dto){
         String key = dto.generateRedisKey();
         String value = dto.getVerifyCode();
         boolean isCorrectVerifyCode = redisService.isExist(key);

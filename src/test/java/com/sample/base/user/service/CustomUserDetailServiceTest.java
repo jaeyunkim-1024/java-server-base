@@ -1,6 +1,6 @@
 package com.sample.base.user.service;
 
-import com.sample.base.client.user.service.CustomUserDetailService;
+import com.sample.base.client.user.service.security.CustomUserDetailService;
 import com.sample.base.common.security.model.CustomUserDetails;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

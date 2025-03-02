@@ -4,7 +4,6 @@ import com.sample.base.client.user.dto.UserInfoDto;
 import com.sample.base.client.user.dto.UserInfoUpdateRequestDto;
 import com.sample.base.client.user.entity.UserInfo;
 import com.sample.base.client.user.repository.UserInfoRepository;
-import com.sample.base.common.service.RedisService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,7 @@ import java.util.Optional;
 @Transactional
 public class UserInfoService {
     private final UserInfoRepository userInfoRepository;
-    private final RedisService redisService;
+    private final UserTokenService userTokenService;
 
     public UserInfoDto update(Long userSeq, UserInfoUpdateRequestDto dto, String emailAtToken) {
         UserInfo org = userInfoRepository.findById(userSeq).orElse(null);
@@ -46,7 +45,7 @@ public class UserInfoService {
                 userInfoRepository.save(merge);
                 /// 이메일 변경 시, 기존 토큰 만료
                 if(!emailAtToken.equals(merge.getEmail())){
-                    redisService.setDisableToken(emailAtToken);
+                    userTokenService.setDisableToken(emailAtToken);
                 }
             }
 
