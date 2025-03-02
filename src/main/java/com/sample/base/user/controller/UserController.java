@@ -1,8 +1,8 @@
 package com.sample.base.user.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.sample.base.common.model.CustomResponseEntity;
-import com.sample.base.common.model.JwtTokenModel;
+import com.sample.base.common.dto.CustomResponseDto;
+import com.sample.base.common.dto.JwtTokenModel;
 import com.sample.base.security.model.CustomUserDetails;
 import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.dto.UserInfoDto;
@@ -25,7 +25,7 @@ public class UserController {
     private final CustomUserDetailService customUserDetailService;
 
     @PatchMapping("/update/{userSeq}")
-    public CustomResponseEntity<Object> update(@RequestBody UserInfoUpdateRequestDto dto, @PathVariable Long userSeq, HttpServletRequest request) throws JsonProcessingException {
+    public CustomResponseDto<Object> update(@RequestBody UserInfoUpdateRequestDto dto, @PathVariable Long userSeq, HttpServletRequest request) throws JsonProcessingException {
         String email = jwtTokenProvider.getPrincipal(request);
         if(!email.equals(dto.getEmail())){
             dto.setUserRole(UserRoles.NO_CERT.getType());
@@ -34,7 +34,7 @@ public class UserController {
 
         boolean isExpireAndReIssue = !email.equals(data.getEmail());
         if(!isExpireAndReIssue){
-            return CustomResponseEntity
+            return CustomResponseDto
                     .builder()
                     .data(data)
                     .build();
@@ -47,7 +47,7 @@ public class UserController {
         CustomUserDetails principal = customUserDetailService.loadUserByUsername(data.getEmail());
         JwtTokenModel token = jwtTokenProvider.reIssuedToken(data.getEmail(),principal,"ROLE_"+principal.getRole());
 
-        return CustomResponseEntity
+        return CustomResponseDto
                 .builder()
                 .data(token)
                 .build();

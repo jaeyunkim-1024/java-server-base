@@ -1,7 +1,7 @@
 package com.sample.base.datasource.jpa;
 
+import com.sample.base.datasource.strategy.UpperCasePhysicalNamingStrategy;
 import jakarta.persistence.EntityManagerFactory;
-import org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.context.annotation.Bean;
@@ -44,7 +44,7 @@ public class JpaConfig {
         properties.put(AvailableSettings.FORMAT_SQL, formatSql); // SQL 포맷 여부
         properties.put(AvailableSettings.USE_SQL_COMMENTS, useSqlComment); // SQL 주석 활성화 여부
         properties.put(AvailableSettings.PHYSICAL_NAMING_STRATEGY,
-                PhysicalNamingStrategyStandardImpl.class.getName()); // 네이밍 전략
+                UpperCasePhysicalNamingStrategy.class.getName()); // 네이밍 전략
         properties.put(AvailableSettings.IMPLICIT_NAMING_STRATEGY,
                 SpringImplicitNamingStrategy.class.getName()); // 네이밍 전략
         properties.put("hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS", 100L); // 느린 쿼리 로그

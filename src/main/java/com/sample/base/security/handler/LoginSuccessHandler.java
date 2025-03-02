@@ -1,7 +1,7 @@
 package com.sample.base.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sample.base.common.model.JwtTokenModel;
+import com.sample.base.common.dto.JwtTokenModel;
 import com.sample.base.security.model.CustomUserDetails;
 import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.entity.LoginHistory;

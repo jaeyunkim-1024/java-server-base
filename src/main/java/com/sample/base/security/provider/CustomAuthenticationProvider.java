@@ -9,13 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        if (authentication.getCredentials() == null) {
+        String presentedPassword = authentication.getCredentials().toString();
+        if (!this.getPasswordEncoder().matches(presentedPassword, userDetails.getPassword())) {
             throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", userDetails.getUsername()));
-        } else {
-            String presentedPassword = authentication.getCredentials().toString();
-            if (!this.getPasswordEncoder().matches(presentedPassword, userDetails.getPassword())) {
-                throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", userDetails.getUsername()));
-            }
         }
     }
 }

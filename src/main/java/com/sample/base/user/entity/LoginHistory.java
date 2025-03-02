@@ -14,21 +14,21 @@ import java.sql.Timestamp;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "LOGIN_HISTORY")
+@Table
 @Getter
 public class LoginHistory {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "LOGIN_HISTORY_SEQ")
+    @Column
     private Long loginHistorySeq;
 
-    @Column(name = "USER_SEQ")
+    @Column
     private Long userSeq;
 
     @UpdateTimestamp
-    @Column(name = "LOGIN_ACCESS_TIME")
+    @Column
     private Timestamp loginAccessTime;
 
-    @Column(name = "ACCESS_CD")
+    @Column
     private String accessCd;
 }

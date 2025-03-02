@@ -1,12 +1,11 @@
 package com.sample.base.user.controller;
 
-import com.sample.base.common.model.CustomResponseEntity;
+import com.sample.base.common.dto.CustomResponseDto;
 import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.dto.LogoutDto;
 import com.sample.base.user.dto.UserInfoDto;
 import com.sample.base.user.dto.UserInfoJoinRequestDto;
 import com.sample.base.user.service.AuthService;
-import com.sample.base.user.service.UserInfoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,21 +22,30 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<CustomResponseEntity<UserInfoDto>> singUp(@Valid @RequestBody UserInfoJoinRequestDto dto) {
-        UserInfoDto data = authService.signUp(dto);
+    public ResponseEntity<CustomResponseDto<UserInfoDto>> singUp(@Valid @RequestBody UserInfoJoinRequestDto dto) {
         return ResponseEntity
-                .ok(new CustomResponseEntity<>(data));
+                .ok(
+                    CustomResponseDto.<UserInfoDto>builder()
+                            .data(authService.signUp(dto))
+                            .build()
+                );
     }
 
     @DeleteMapping("/sign-out")
-    public ResponseEntity<CustomResponseEntity<LogoutDto>> logout(HttpServletRequest request) {
+    public ResponseEntity<CustomResponseDto<LogoutDto>> logout(HttpServletRequest request) {
         String email = jwtTokenProvider.getPrincipal(request);
         Boolean data = jwtTokenProvider.tokenExpire(email);
         if(data){
             authService.logout(email);
         }
-        CustomResponseEntity<LogoutDto> result = new CustomResponseEntity<>(
-                new LogoutDto(data));
-        return ResponseEntity.ok(result);
+        CustomResponseDto<LogoutDto> result = CustomResponseDto.<LogoutDto>builder()
+                .data(new LogoutDto(data))
+                .build();
+        return ResponseEntity
+                .ok(
+                    CustomResponseDto.<LogoutDto>builder()
+                            .data(new LogoutDto(data))
+                            .build()
+                );
     }
 }

@@ -1,12 +1,12 @@
 package com.sample.base.security.provider;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sample.base.common.config.DotEnvScheme;
-import com.sample.base.common.model.JwtTokenModel;
+import com.sample.base.common.dto.JwtTokenModel;
 import com.sample.base.common.util.CustomTimeUtil;
 import com.sample.base.redis.service.RedisService;
 import com.sample.base.security.model.CustomUserDetails;
 import com.sample.base.user.enums.UserRoles;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

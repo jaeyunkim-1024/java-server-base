@@ -1,6 +1,6 @@
 package com.sample.base.user.controller;
 
-import com.sample.base.common.model.CustomResponseEntity;
+import com.sample.base.common.dto.CustomResponseDto;
 import com.sample.base.user.dto.LogoutDto;
 import com.sample.base.user.service.AdminUserInfoService;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +19,12 @@ public class AdminUserController {
     private final AdminUserInfoService adminUserInfoService;
 
     @PostMapping("/{userId}/expire-tokens")
-    public ResponseEntity<CustomResponseEntity<LogoutDto>> expireTokens(@PathVariable Long userId) {
+    public ResponseEntity<CustomResponseDto<LogoutDto>> expireTokens(@PathVariable Long userId) {
         Boolean success = adminUserInfoService.expireToken(userId);
-        CustomResponseEntity<LogoutDto> result = new CustomResponseEntity<>(
-                new LogoutDto(success));
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(
+                CustomResponseDto.<LogoutDto>builder()
+                        .data(new LogoutDto(success))
+                        .build()
+        );
     }
 }

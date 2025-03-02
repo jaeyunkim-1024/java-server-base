@@ -25,7 +25,7 @@ public class UserInfoService {
         /// 사용자 없으면
         if(org == null){
             return UserInfoDto.builder()
-                    .username(dto.getUsername())
+                    .userName(dto.getUsername())
                     .email(dto.getEmail())
                     .build();
         }
@@ -53,7 +53,7 @@ public class UserInfoService {
             return UserInfoDto.fromEntity(merge);
         }
         return UserInfoDto.builder()
-                .username(dto.getUsername())
+                .userName(dto.getUsername())
                 .email(dto.getEmail())
                 .build();
     }

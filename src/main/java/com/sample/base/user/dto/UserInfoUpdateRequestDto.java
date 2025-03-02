@@ -16,7 +16,7 @@ public class UserInfoUpdateRequestDto {
     public UserInfo toEntity(Long userSeq){
         return UserInfo.builder()
                 .userSeq(userSeq)
-                .username(username)
+                .userName(username)
                 .email(email)
                 .userRole(userRole)
                 .build();

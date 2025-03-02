@@ -7,6 +7,7 @@ public enum DotEnvScheme {
 
     REDIS_HOST,
     REDIS_PORT,
+    REDIS_PASSWORD,
 
     JWT_SECRETKEY,
     JWT_EXPIRATION,

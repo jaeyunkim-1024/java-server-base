@@ -25,7 +25,7 @@ class UserInfoRepositoryTest {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         UserInfo entity = UserInfo.builder()
                         .email(email)
-                        .username(username)
+                        .userName(username)
                         .password(password)
                         .createdAt(timestamp)
                         .updatedAt(timestamp)

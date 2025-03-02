@@ -1,6 +1,8 @@
 package com.sample.base.security.model;
 
+import com.sample.base.user.entity.UserInfo;
 import com.sample.base.user.enums.UserRoles;
+import jakarta.annotation.Nullable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -75,5 +77,21 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isAccountNonExpired() {
         return true;
+    }
+
+    static public CustomUserDetails toPrincipal(@Nullable UserInfo entity){
+        if(entity == null){
+            return CustomUserDetails.builder().build();
+        }
+        return CustomUserDetails.builder()
+                .userSeq(entity.getUserSeq())
+                .email(entity.getEmail())
+                .password(entity.getPassword())
+                .role(entity.getUserRole())
+                .createdAt(entity.getCreatedAt())
+                .isLock(entity.getIsLock())
+                .myName(entity.getUserName())
+                .build();
+
     }
 }

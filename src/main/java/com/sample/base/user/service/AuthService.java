@@ -33,7 +33,7 @@ public class AuthService {
 
     public UserInfoDto signUp(UserInfoJoinRequestDto dto) {
         String email = dto.getEmail();
-        String username = dto.getUsername();
+        String username = dto.getUserName();
         if(!StringUtils.hasLength(email) || !StringUtils.hasLength(username)) {
             throw new IllegalArgumentException("빈 값입니다.");
         }
@@ -52,7 +52,7 @@ public class AuthService {
         Timestamp expireAt = CustomTimeUtil.getExpireTimeByDays(90,true);
 
         UserInfo entity= UserInfo.builder()
-                .username(dto.getUsername())
+                .userName(dto.getUserName())
                 .email(dto.getEmail())
                 .createdAt(createdAt)
                 .updatedAt(createdAt)

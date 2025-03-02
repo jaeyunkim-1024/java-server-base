@@ -23,7 +23,7 @@ class UserInfoServiceTest {
     static void setUp(){
         userInfoJoinRequestDto = UserInfoJoinRequestDto.builder()
                 .email(email)
-                .username(username)
+                .userName(username)
                 .build();
     }
 

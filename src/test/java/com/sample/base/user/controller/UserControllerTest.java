@@ -1,7 +1,7 @@
 package com.sample.base.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sample.base.common.model.CustomResponseEntity;
+import com.sample.base.common.dto.CustomResponseDto;
 import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.dto.UserInfoJoinRequestDto;
 import org.junit.jupiter.api.*;
@@ -56,7 +56,7 @@ class UserControllerTest {
         UserInfoJoinRequestDto dto = UserInfoJoinRequestDto.builder()
                         .email(email)
                         .password(password)
-                        .username(username)
+                        .userName(username)
                         .build();
 
 
@@ -81,7 +81,7 @@ class UserControllerTest {
         UserInfoJoinRequestDto dto = UserInfoJoinRequestDto.builder()
                 .email(email)
                 .password(password)
-                .username(username)
+                .userName(username)
                 .build();
 
 
@@ -106,7 +106,7 @@ class UserControllerTest {
         UserInfoJoinRequestDto dto = UserInfoJoinRequestDto.builder()
                 .email(email)
                 .password(password)
-                .username(username)
+                .userName(username)
                 .build();
 
 
@@ -131,7 +131,7 @@ class UserControllerTest {
         UserInfoJoinRequestDto dto = UserInfoJoinRequestDto.builder()
                 .email(email)
                 .password(password)
-                .username(username)
+                .userName(username)
                 .build();
 
 
@@ -159,7 +159,7 @@ class UserControllerTest {
         UserInfoJoinRequestDto dto = UserInfoJoinRequestDto.builder()
                 .email(email)
                 .password(password)
-                .username(username)
+                .userName(username)
                 .build();
 
 
@@ -192,7 +192,7 @@ class UserControllerTest {
                 .andExpect(status().is(200))
                 .andExpect(result -> {
                     String res = result.getResponse().getContentAsString();
-                    CustomResponseEntity dto = objectMapper.readValue(res, CustomResponseEntity.class);
+                    CustomResponseDto dto = objectMapper.readValue(res, CustomResponseDto.class);
                     LinkedHashMap<String,Boolean> data = (LinkedHashMap<String,Boolean>) dto.getData();
                     assertTrue(data.get("success"));
 

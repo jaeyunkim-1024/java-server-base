@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 public class UserInfoJoinRequestDto {
     @NotBlank(message = "사용자 이름을 입력하세요.")
-    private String username;
+    private String userName;
 
     @NotBlank(message = "이메일을 입력하세요.")
     private String email;

@@ -1,4 +1,4 @@
-package com.sample.base.common.model;
+package com.sample.base.common.dto;
 
 import lombok.*;
 

@@ -51,8 +51,8 @@ public class SecurityConfig {
                                                 ,"/api/auth/sign-in"
                                         ).permitAll()
                                         .requestMatchers("/api/admin/**").hasRole(UserRoles.ADMIN.getType())
-                                        .requestMatchers("/api/auth/sign-out").hasAnyRole(UserRoles.ADMIN.getType(),UserRoles.USER.getType(),UserRoles.NO_CERT.getType())
-                                        .anyRequest().hasAnyRole(UserRoles.ADMIN.getType(), UserRoles.USER.getType())
+                                        .requestMatchers("/api/auth/sign-out","/kafka/topic/email/**").hasAnyRole(UserRoles.ADMIN.getType(),UserRoles.USER.getType(),UserRoles.NO_CERT.getType())
+                                        .anyRequest().hasAnyRole(UserRoles.USER.getType())
                 )
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionFilter(), JwtFilter.class)

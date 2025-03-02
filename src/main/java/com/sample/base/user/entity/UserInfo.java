@@ -20,45 +20,45 @@ import java.util.Optional;
 public class UserInfo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "USER_SEQ")
+    @Column
     private Long userSeq;
 
-    @Column(name = "USER_EMAIL")
+    @Column
     private String email;
 
-    @Column(name = "USER_PASSWORD")
+    @Column
     private String password;
 
-    @Column(name = "USER_NAME")
-    private String username;
+    @Column
+    private String userName;
 
-    @Column(name = "CREATED_AT")
+    @Column
     private Timestamp createdAt;
 
-    @Column(name = "UPDATED_AT")
+    @Column
     private Timestamp updatedAt;
 
-    @Column(name = "EXPIRE_AT")
+    @Column
     private Timestamp expireAt;
 
     @Builder.Default
-    @Column(name = "IS_LOCK")
+    @Column
     private Boolean isLock = false;
 
     @Builder.Default
-    @Column(name = "USER_ROLE")
+    @Column
     private String userRole = UserRoles.NO_CERT.getType();
 
     public UserInfo mergeFrom(UserInfo userInfo) {
         String newEmail = Optional.ofNullable(userInfo.getEmail()).orElse(this.email);
-        String newUserName = Optional.ofNullable(userInfo.getUsername()).orElse(this.username);
+        String newUserName = Optional.ofNullable(userInfo.getUserName()).orElse(this.userName);
         String newUserRole = Optional.ofNullable(userInfo.getUserRole()).orElse(this.userRole);
-        boolean isUpdate = (!this.email.equals(newEmail) || !this.username.equals(newUserName) || !this.userRole.equals(newUserRole));
+        boolean isUpdate = (!this.email.equals(newEmail) || !this.userName.equals(newUserName) || !this.userRole.equals(newUserRole));
         return UserInfo.builder()
                 .userSeq(userInfo.getUserSeq())
                 .updatedAt(isUpdate ? CustomTimeUtil.getCurrentTime() : this.updatedAt)
                 .email(this.email.equals(newEmail) ? this.email : newEmail)
-                .username(this.username.equals(newUserName) ? this.username : newUserName)
+                .userName(this.userName.equals(newUserName) ? this.userName : newUserName)
                 .userRole(this.userRole.equals(newUserRole) ? this.userRole : newUserRole)
                 .password(this.password)
                 .createdAt(this.createdAt)

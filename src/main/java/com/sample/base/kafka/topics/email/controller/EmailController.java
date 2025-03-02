@@ -1,6 +1,7 @@
 package com.sample.base.kafka.topics.email.controller;
 
-import com.sample.base.common.model.CustomResponseEntity;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sample.base.common.dto.CustomResponseDto;
 import com.sample.base.common.util.VerifyCodeUtil;
 import com.sample.base.kafka.topics.email.model.EmailDto;
 import com.sample.base.kafka.topics.email.service.EmailProducer;
@@ -9,8 +10,6 @@ import com.sample.base.security.provider.JwtTokenProvider;
 import com.sample.base.user.enums.UserRoles;
 import com.sample.base.user.service.AuthService;
 import com.sample.base.user.service.CustomUserDetailService;
-import com.sample.base.user.service.UserInfoService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +27,10 @@ public class EmailController {
     private final CustomUserDetailService customUserDetailService;
 
     @PostMapping(value = "/send")
-    public CustomResponseEntity<Object> sendMessage(HttpServletRequest request) {
+    public CustomResponseDto<Object> sendMessage(HttpServletRequest request) {
         boolean isCert = jwtTokenProvider.isCertUser(request);
         if(isCert) {
-            return CustomResponseEntity
+            return CustomResponseDto
                     .builder()
                     .data("이미 인증한 회원입니다.")
                     .build();
@@ -44,17 +43,17 @@ public class EmailController {
                 .verifyCode(verifyCode)
                 .build();
         this.producer.send(emailDto.toString());
-        return CustomResponseEntity
+        return CustomResponseDto
                 .builder()
                 .data("이메일이 발송되었습니다.")
                 .build();
     }
 
     @PostMapping(value = "/verify")
-    public CustomResponseEntity<Object> verify(@RequestParam(name = "verifyCode", required = false)String verifyCode, HttpServletRequest request) {
+    public CustomResponseDto<Object> verify(@RequestParam(name = "verifyCode", required = false)String verifyCode, HttpServletRequest request) {
         boolean isCert = jwtTokenProvider.isCertUser(request);
         if(isCert) {
-            return CustomResponseEntity
+            return CustomResponseDto
                     .builder()
                     .data("이미 인증한 회원입니다.")
                     .build();
@@ -78,7 +77,7 @@ public class EmailController {
                 token = e.getMessage();
             }
         }
-        return CustomResponseEntity
+        return CustomResponseDto
                 .builder()
                 .data(token)
                 .build();
