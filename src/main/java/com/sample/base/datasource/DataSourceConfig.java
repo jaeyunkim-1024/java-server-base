@@ -1,6 +1,6 @@
 package com.sample.base.datasource;
 
-import com.sample.base.common.config.DotEnvScheme;
+import com.sample.base.common.config.env.DotEnvScheme;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import io.github.cdimascio.dotenv.Dotenv;

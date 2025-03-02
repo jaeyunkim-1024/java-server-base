@@ -15,13 +15,15 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.sample.base.*.repository")
+@EnableJpaRepositories(basePackages = {
+        "com.sample.base.client.*.repository"
+})
 public class JpaConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("com.sample.base.*.entity"); // 엔티티 클래스 위치 지정
+        em.setPackagesToScan("com.sample.base.client.*.entity"); // 엔티티 클래스 위치 지정
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

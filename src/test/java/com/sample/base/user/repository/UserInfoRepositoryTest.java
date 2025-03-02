@@ -1,6 +1,7 @@
 package com.sample.base.user.repository;
 
-import com.sample.base.user.entity.UserInfo;
+import com.sample.base.client.user.entity.UserInfo;
+import com.sample.base.client.user.repository.UserInfoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

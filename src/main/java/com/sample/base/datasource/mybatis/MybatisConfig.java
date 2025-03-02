@@ -1,7 +1,7 @@
 package com.sample.base.datasource.mybatis;
 
-import com.sample.base.user.entity.LoginHistory;
-import com.sample.base.user.entity.UserInfo;
+import com.sample.base.client.user.entity.LoginHistory;
+import com.sample.base.client.user.entity.UserInfo;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;

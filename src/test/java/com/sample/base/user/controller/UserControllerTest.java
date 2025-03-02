@@ -1,9 +1,9 @@
 package com.sample.base.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sample.base.client.user.dto.UserInfoJoinRequestDto;
 import com.sample.base.common.dto.CustomResponseDto;
-import com.sample.base.security.provider.JwtTokenProvider;
-import com.sample.base.user.dto.UserInfoJoinRequestDto;
+import com.sample.base.common.security.provider.JwtTokenProvider;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

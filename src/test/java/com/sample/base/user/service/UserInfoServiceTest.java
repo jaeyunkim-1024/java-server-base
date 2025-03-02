@@ -1,7 +1,8 @@
 package com.sample.base.user.service;
 
-import com.sample.base.user.dto.UserInfoDto;
-import com.sample.base.user.dto.UserInfoJoinRequestDto;
+import com.sample.base.client.user.dto.UserInfoDto;
+import com.sample.base.client.user.dto.UserInfoJoinRequestDto;
+import com.sample.base.client.user.service.AuthService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

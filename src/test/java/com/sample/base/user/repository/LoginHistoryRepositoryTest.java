@@ -1,7 +1,9 @@
 package com.sample.base.user.repository;
 
-import com.sample.base.user.entity.LoginHistory;
-import com.sample.base.user.enums.AccessCode;
+import com.sample.base.client.user.entity.LoginHistory;
+import com.sample.base.client.user.enums.AccessCode;
+import com.sample.base.client.user.repository.LoginHistoryRepository;
+import com.sample.base.client.user.repository.UserInfoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
