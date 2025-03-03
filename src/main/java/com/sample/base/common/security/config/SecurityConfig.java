@@ -52,7 +52,7 @@ public class SecurityConfig {
                                         ).permitAll()
                                         .requestMatchers("/api/admin/**")
                                             .hasRole(UserRoles.ADMIN.getType())
-                                        .requestMatchers("/api/auth/sign-out")
+                                        .requestMatchers("/api/auth/sign-out","/api/auth/email/**")
                                             .hasAnyRole(UserRoles.ADMIN.getType(),UserRoles.USER.getType(),UserRoles.NO_CERT.getType())
                                         .anyRequest()
                                             .hasAnyRole(UserRoles.ADMIN.getType(),UserRoles.USER.getType())
