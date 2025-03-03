@@ -1,4 +1,4 @@
-package com.sample.base.common.security.filter;
+package com.sample.base.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sample.base.client.user.dto.LoginRequestDto;

@@ -3,7 +3,7 @@ package com.sample.base.admin.service;
 import com.sample.base.client.user.entity.UserInfo;
 import com.sample.base.client.user.enums.UserRoles;
 import com.sample.base.client.user.repository.UserInfoRepository;
-import com.sample.base.common.security.provider.JwtTokenProvider;
+import com.sample.base.security.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

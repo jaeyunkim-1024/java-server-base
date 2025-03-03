@@ -1,4 +1,4 @@
-package com.sample.base.mybatis.mappers;
+package com.sample.base.mappers;
 
 import com.sample.base.client.user.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;

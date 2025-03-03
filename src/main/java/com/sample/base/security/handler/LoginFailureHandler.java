@@ -1,4 +1,4 @@
-package com.sample.base.common.security.handler;
+package com.sample.base.security.handler;
 
 import com.sample.base.client.user.entity.LoginHistory;
 import com.sample.base.client.user.entity.UserInfo;

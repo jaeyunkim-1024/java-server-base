@@ -1,4 +1,4 @@
-package com.sample.base.common.security.provider;
+package com.sample.base.security.provider;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

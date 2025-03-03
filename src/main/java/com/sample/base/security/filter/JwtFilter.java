@@ -1,6 +1,6 @@
-package com.sample.base.common.security.filter;
+package com.sample.base.security.filter;
 
-import com.sample.base.common.security.provider.JwtTokenProvider;
+import com.sample.base.security.provider.JwtTokenProvider;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

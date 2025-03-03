@@ -1,7 +1,7 @@
 package com.sample.base.client.user.service.security;
 
 import com.sample.base.client.user.repository.UserInfoRepository;
-import com.sample.base.common.security.model.CustomUserDetails;
+import com.sample.base.security.model.CustomUserDetails;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

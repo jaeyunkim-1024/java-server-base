@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 @ComponentScan(basePackages = "com.sample.base")
 @MapperScan(
-        basePackages = "com.sample.base.mybatis.mappers",
+        basePackages = "com.sample.base.mappers",
         sqlSessionFactoryRef = "sqlSessionFactory"
 )
 @Configuration
@@ -25,7 +25,7 @@ public class MybatisConfig {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setMapperLocations(
-                new PathMatchingResourcePatternResolver().getResources("classpath:mybatis/mappers/*.xml")
+                new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*.xml")
         );
         setTypeAliases(sessionFactory);
         return sessionFactory.getObject();

@@ -1,4 +1,4 @@
-package com.sample.base.common.security.handler;
+package com.sample.base.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sample.base.client.user.entity.LoginHistory;
@@ -7,8 +7,8 @@ import com.sample.base.client.user.enums.AccessCode;
 import com.sample.base.client.user.repository.LoginHistoryRepository;
 import com.sample.base.client.user.repository.UserInfoRepository;
 import com.sample.base.common.dto.JwtTokenModel;
-import com.sample.base.common.security.model.CustomUserDetails;
-import com.sample.base.common.security.provider.JwtTokenProvider;
+import com.sample.base.security.model.CustomUserDetails;
+import com.sample.base.security.provider.JwtTokenProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

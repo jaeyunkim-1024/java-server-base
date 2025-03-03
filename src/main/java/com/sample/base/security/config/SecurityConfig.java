@@ -1,14 +1,14 @@
-package com.sample.base.common.security.config;
+package com.sample.base.security.config;
 
 import com.sample.base.client.user.enums.UserRoles;
 import com.sample.base.client.user.service.security.CustomUserDetailService;
-import com.sample.base.common.security.filter.JwtExceptionFilter;
-import com.sample.base.common.security.filter.JwtFilter;
-import com.sample.base.common.security.filter.LoginFilter;
-import com.sample.base.common.security.handler.LoginFailureHandler;
-import com.sample.base.common.security.handler.LoginSuccessHandler;
-import com.sample.base.common.security.provider.CustomAuthenticationProvider;
-import com.sample.base.common.security.provider.JwtTokenProvider;
+import com.sample.base.security.filter.JwtExceptionFilter;
+import com.sample.base.security.filter.JwtFilter;
+import com.sample.base.security.filter.LoginFilter;
+import com.sample.base.security.handler.LoginFailureHandler;
+import com.sample.base.security.handler.LoginSuccessHandler;
+import com.sample.base.security.provider.CustomAuthenticationProvider;
+import com.sample.base.security.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.sample.base.common.security.model;
+package com.sample.base.security.model;
 
 import com.sample.base.client.user.entity.UserInfo;
 import com.sample.base.client.user.enums.UserRoles;

@@ -1,4 +1,4 @@
-package com.sample.base.common.security.filter;
+package com.sample.base.security.filter;
 
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
