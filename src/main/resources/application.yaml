@@ -1,6 +1,6 @@
 spring:
   application:
-    name: base
+    name: java-server-base
 springdoc:
   paths-to-match: /api/**
 

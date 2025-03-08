@@ -18,7 +18,6 @@ public enum DotEnvScheme {
 
     SMTP_HOST,
     SMTP_PORT,
-    SMTP_SOCKET_FACTORY_CLASS,
     SMTP_USERNAME,
     SMTP_PASSWORD,
     SMTP_FROM_MAIL;

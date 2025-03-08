@@ -27,7 +27,7 @@ public class MailConfig {
         pt.put("mail.smtp.starttls.enable", true);
         pt.put("mail.smtp.starttls.required", true);
         pt.put("mail.smtp.socketFactory.fallback", false);
-        pt.put("mail.smtp.socketFactory.class", this.mailProperties.getSocketFactoryClass());
+        pt.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
         javaMailSender.setJavaMailProperties(pt);
         javaMailSender.setDefaultEncoding("UTF-8");

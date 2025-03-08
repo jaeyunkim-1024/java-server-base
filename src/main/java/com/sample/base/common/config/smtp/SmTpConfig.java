@@ -28,10 +28,6 @@ public class SmTpConfig {
         return dotenv.get(DotEnvScheme.SMTP_PASSWORD.name());
     }
 
-    public String getSocketFactoryClass(){
-        return dotenv.get(DotEnvScheme.SMTP_SOCKET_FACTORY_CLASS.name());
-    }
-
     public String getFromMail(){
         return dotenv.get(DotEnvScheme.SMTP_FROM_MAIL.name());
     }
